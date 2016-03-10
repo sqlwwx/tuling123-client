@@ -32,7 +32,7 @@
   })();
 
   if (require.main === module) {
-    robot = new Robot('0a4114ff7687944016c9d50a07eb0f50', 'http://www.tuling123.com/openapi/api');
+    robot = new Robot('0a4114ff7687944016c9d50a07eb0f250', 'http://www.tuling123.com/openapi/api');
     robot.ask('你好', {
       userid: 'wwx'
     }).then(function(data) {
