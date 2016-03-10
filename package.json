@@ -1,0 +1,22 @@
+{
+  "name": "tuling123-client",
+  "version": "0.0.1",
+  "description": "",
+  "main": "./lib/index.js",
+  "scripts": {
+    "lint": "node_modules/.bin/coffeelint index.coffee",
+    "prepublish": "npm run lint && node_modules/.bin/coffee -c index.coffee"
+  },
+  "author": {
+    "name": "wuweixing",
+    "email": "wwx_2012@hotmail.com"
+  },
+  "license": "ISC",
+  "dependencies": {
+    "bluebird": "^3.3.4",
+    "request": "^2.69.0"
+  },
+  "devDependencies": {
+    "coffeelint": "^1.15.0"
+  }
+}
