@@ -9,12 +9,18 @@
   Promise.promisifyAll(request);
 
   module.exports = Robot = class Robot {
-    constructor(key, api = 'http://www.tuling123.com/openapi/api') {
+    constructor(key, api = 'http://www.tuling123.com/openapi/api', answer1) {
       this.key = key;
       this.api = api;
+      this.answer = answer1;
     }
 
-    ask(info, options = {}) {
+    async ask(info, options = {}, answer = this.answer) {
+      var ret;
+      ret = answer ? (await answer(info, options)) : void 0;
+      if (ret) {
+        return ret;
+      }
       options.key = this.key;
       options.info = info;
       return request.getAsync(this.api, {
@@ -27,12 +33,28 @@
   };
 
   if (require.main === module) {
-    robot = new Robot('0a4114ff7687944016c9d50a07eb0f250', 'http://www.tuling123.com/openapi/api');
+    robot = new Robot('0a4114ff7687944016c9d50a07eb0f250', 'http://www.tuling123.com/openapi/api', function(info, options) {
+      if (info.startsWith('#')) {
+        return 'start command ' + info.substr(1);
+      } else {
+        return null;
+      }
+    });
     robot.ask('你好', {
       userid: 'wwx'
-    }).then(function(data) {
-      console.log(data);
-    });
+    }).then(console.log);
+    robot.ask('#list', {
+      userid: 'wwx'
+    }).then(console.log);
+    robot.ask('#list', {
+      userid: 'wwx'
+    }, function(info, options) {
+      if (info.startsWith('#')) {
+        return 'start command ' + info.substr(1) + ' for ' + options.userid;
+      } else {
+        return null;
+      }
+    }).then(console.log);
   }
 
 }).call(this);
