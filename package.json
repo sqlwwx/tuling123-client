@@ -1,6 +1,6 @@
 {
   "name": "tuling123-client",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "```shell npm install tuling123-client ``` ## Getting Started",
   "main": "./index.js",
   "scripts": {
